@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
 #define QUEUE_MAXSIZE 10
+
 class Node {
 public:
 	int data;
