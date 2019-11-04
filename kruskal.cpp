@@ -20,13 +20,13 @@ bool comp(pair<pair<int, int>, int> e1, pair<pair<int, int>, int> e2) {
 }
 int main() {
 	int v;
-	cout << "Enter number of nodes:";
+ 	cout << "Enter number of nodes:";
 	cin >> v;
-	for(int i=0;i<v;i++) {
+	for(int i=0;i<=v;i++) { // <= v for it to work with first node as 0 or 1
 		djarr.push_back(i);
-	}	
+	}
 	int n;
-	cout << "Enter number of edges:";
+ 	cout << "Enter number of edges:";
 	cin >> n;
 	vector<pair<pair<int, int>, int>> graph;
 	int v1, v2, weight;
@@ -42,12 +42,13 @@ int main() {
 			do_union(graph[i].first.first, graph[i].first.second);
 			min_cost += graph[i].second;
 			mst.push_back({{graph[i].first.first, graph[i].first.second}, graph[i].second});
+			
 		}
 	}
 	cout << min_cost << endl;
-	cout << "N1 N2 Weight\n";
-	for(int i=0;i<mst.size();i++) {
-		cout << mst[i].first.first << ' ' << mst[i].first.second << ' ' << mst[i].second << endl;
-	}
+ 	cout << "N1 N2 Weight\n";
+ 	for(int i=0;i<mst.size();i++) {
+ 		cout << mst[i].first.first << ' ' << mst[i].first.second << ' ' << mst[i].second << endl;
+ 	}
 	return 0;
 }
