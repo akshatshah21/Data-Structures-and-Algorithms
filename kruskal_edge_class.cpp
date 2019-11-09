@@ -50,7 +50,7 @@ int main() {
 		if(!find(graph[i].src, graph[i].dest)) { 
 			do_union(graph[i].src, graph[i].dest);
 			min_cost += graph[i].weight;
-			mst[count++] = Edge(graph[i].src, graph[i].dest, graph[i].weight);
+			mst[count++] = graph[i];
 		}
 	}
 	cout << min_cost << "\nN1 N2 Weight\n";
