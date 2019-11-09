@@ -25,7 +25,7 @@ void do_union(int x, int y) {
 	}
 }
 int find(int x, int y) {
-	return ds[x] == ds[y] ? true : false;
+	return ds[x] == ds[y];
 }
 int main() {
  	cout << "Enter number of nodes:";
