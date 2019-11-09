@@ -36,7 +36,7 @@ void mergesort(int arr[], int low, int high) {
 	merge(arr, low, mid, high);
 }
 int main() {
-	int arr[] = {5,4, 1, 2, 3, 6, 7, 43, 5, 1};
+	int arr[] = {5, 4, 1, 2, 3, 6, 7, 43, 5, 1};
 	mergesort(arr, 0, 9);
 	for(int i=0;i<10;i++)	cout << arr[i] << ' ';
 	cout << endl;
