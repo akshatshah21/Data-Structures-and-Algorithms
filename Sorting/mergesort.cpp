@@ -1,32 +1,35 @@
 #include<iostream>
 using namespace std;
 void merge(int arr[], int low, int mid, int high) {
-	int l1 = mid-low+1, l2 = high - mid;
-	int L[l1], R[l2];
-	for(int i=0;i<l1;i++)	L[i] = arr[low+i];
-	for(int j=0; j<l2; j++)	R[j] = arr[mid+1+j];
-	int i=0, j=0, k=low; // i -> L | j -> R | k -> arr
-	while(i < l1 && j < l2) {
-		if(L[i] <= R[j]) {
-			arr[k] = L[i];
-			i++;
+	int A[high-low+1]; // temp array
+	for(int i=low; i<=high; i++)
+		A[i-low] = arr[i];
+	int p1 = 0;	// low - low | pointer to left subarr in temp arr A
+	int p2 = mid+1-low; // pointer to right subarr in temp arr A
+	int p = low;	// pointer to low in arr
+	while(p1 <= mid-low && p2 <=high-low) { // -low is the offset in temp arr A
+		if(A[p1] <= A[p2]) {
+			arr[p] = A[p1];
+			p1++;
+			p++;
 		}
 		else {
-			arr[k] = R[j];
-			j++;
+			arr[p] = A[p2];
+			p2++;
+			p++;
 		}
-		k++;
 	}
-	while(i<l1) {
-		arr[k] = L[i];
-		k++;
-		i++;
+	while(p1 <= mid-low) {	// -low is the offset in temp arr A
+		arr[p] = A[p1];
+		p1++;
+		p++;
 	}
-	while(j < l2) {
-		arr[k] = R[j];
-		k++;
-		j++;
+	while(p2 <= high-low) {	// -low is the offset in temp arr A
+		arr[p] = A[p2];
+		p2++;
+		p++;
 	}
+
 }
 void mergesort(int arr[], int low, int high) {
 	if(low >= high)	return;
