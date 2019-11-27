@@ -34,9 +34,11 @@ int pop(int sn) {
 		cout << "Stack Underflow, returning -999\n";
 		return -999;
 	}
+
 	/*
 		Note that the next four lines are the exact reverse of push() code
 	*/
+
 	int i = top[sn];    // i now holds the index of arr to be emptied/popped
 	top[sn] = next[i];  // top pointer should now point to second top element, given by next[current_top_pointer]
 	next[i] = free;     // The second available position, which is currently in free, given to next[i]
