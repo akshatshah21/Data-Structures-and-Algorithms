@@ -55,4 +55,5 @@ int main() {
 	cout << "Now all stacks should be empty\n"	;
 	cout << pop(0) << endl;
 	cout << pop(0) << endl;
+	return 0;
 }
