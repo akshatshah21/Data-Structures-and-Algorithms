@@ -1,7 +1,7 @@
 /*
     Implement a stack using single queue
     push(): O(n)
-    pop(): O{1}
+    pop(): O(1)
     In every push(x) operation:
         1. Enqueue x to queue
         2. For all elements except the one just inserted:
