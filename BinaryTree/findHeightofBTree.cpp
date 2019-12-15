@@ -14,8 +14,8 @@ int heightOf(Node *root) {
 	if(root==NULL)
 		return 0;
 	int l = heightOf(root->left);
-	int h = heightOf(root->right);
-	return (l>h ? l: h) + 1;
+	int r = heightOf(root->right);
+	return (l>r ? l: r) + 1;
 }
 
 int main() {

@@ -1,6 +1,8 @@
 #include<iostream>
 using namespace std;
 #define MAX_NODES 10
+
+/*	 MIN-HEAP	*/
 int arr[MAX_NODES], ptr = 0;
 void swap(int &a, int &b) {
 	int t = a;
@@ -35,11 +37,11 @@ int dequeue() {
 	arr[0] = arr[--ptr];
 	int pos = 0;
 	while(arr[pos] > arr[2*pos+1] || arr[pos] > arr[2*pos+2]) {	// root element sinking to its place
-		if(arr[2*pos+1] < arr[2*pos+2] && (2*pos+1 < ptr)) { // left > right
+		if(arr[2*pos+1] < arr[2*pos+2] && (2*pos+1 < ptr)) { // left < right
 			swap(arr[pos], arr[2*pos+1]);
 			pos = 2*pos+1;
 		}
-		else if(2*pos+2 < ptr){ // right >= left
+		else if(2*pos+2 < ptr){ // right <= left
 			swap(arr[pos], arr[2*pos+2]);
 			pos = 2*pos+2;
 		}
