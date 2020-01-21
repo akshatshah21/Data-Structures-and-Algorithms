@@ -6,14 +6,14 @@ using namespace std;
 	Time: O(n^2) | Space: O(1)
 */
 void insertionSort(int arr[], int n) {
-	for(int k=1;k<n;k++) {	// start from k = 1
-		int temp = arr[k];	// take arr[k], insert it at its correct pos in arr[0 to k]
+	for(int i=1;i<n;i++) {	// start from k = 1
+		int key =  arr[i];	// take arr[i], insert it at its correct pos in arr[0 to i]
 		int j = k-1;
-		while(j >= 0 && arr[j] > temp) {
-			arr[j+1] = arr[j];	// if arr[j] > temp, move it ahead
+		while(j >= 0 && arr[j] > key) {
+			arr[j+1] = arr[j];	// if arr[j] > key, move it ahead
 			j -= 1;				// check next left element
 		}
-		arr[j+1] = temp;		// correct place for temp in arr[0 to k]
+		arr[j+1] = temp;		// correct place for temp in arr[0 to i]
 	}
 }
 int main() {
