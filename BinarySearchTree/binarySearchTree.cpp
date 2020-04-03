@@ -21,7 +21,10 @@ private:
 	void preorder(BSTNode<T> *root);
 	void inorder(BSTNode<T> *root);
 	void postorder(BSTNode<T> *root);
-	void removeNode(BSTNode<T> *root, T key);
+	BSTNode<T>* removeNode(BSTNode<T> *root, T key);
+	BSTNode<T>* findMinNode(BSTNode<T>* root);
+	BSTNode<T>* findMaxNode(BSTNode<T>* root);
+	void copyNodeData(BSTNode<T>* from, BSTNode<T>* to);
 public:
 	BSTNode<T> *root; // shift this to private later
 
@@ -36,6 +39,9 @@ public:
 	void printPostorder();
 	void printLevelorder();
 	void remove(T key);
+	T min();
+	T max();
+	bool find(T key);
 };
 
 template<class T>
@@ -63,7 +69,7 @@ void BST<T>::insert(T x) {
 template<class T>
 BST<T>::BSTNode<T>* BST<T>::insert(BSTNode<T>* root, T x) {
 	if(root == NULL) {
-		root = new BSTNode(x);
+		root = new BSTNode<T>(x);
 
 	}
 	else if(x < root -> data) {
@@ -140,14 +146,86 @@ void BST<T>::postorder(BSTNode<T> *root) {
 }
 
 template<class T>
+void BST<T>::copyNodeData(BSTNode<T>* from, BSTNode<T>* to) {
+	to -> data = from -> data;
+}
+
+template<class T>
 void BST<T>::remove(T key) {
-	removeNode(root, key);
+	root = removeNode(root, key);
 }
 
 template<class T>
 BST<T>::BSTNode<T>* BST<T>::removeNode(BSTNode<T>* root, T key) {
-	
+	if(root == NULL) // not found
+		return NULL;
+	if(key < root -> data)
+		root -> left = removeNode(root -> left, key);
+	else if(key > root -> data)
+		root -> right = removeNode(root -> right, key);
+	else {
+		// Node found
+		// Case 1: No children
+		if(root -> right == NULL && root -> left == NULL) {
+			delete root;
+			root = NULL;
+		}
+		// Case 2: One child
+		else if(root -> right == NULL) {
+			BSTNode<T>* temp = root;
+			root = root -> left;
+			delete temp;
+		}
+		else if(root -> left == NULL) {
+			BSTNode<T>* temp = root;
+			root = root -> right;
+			delete temp;
+		}
+		//Case 3: Two children
+		else {
+			BSTNode<T>* successor = findMinNode(root->right);
+			copyNodeData(successor, root);
+			root -> right = removeNode(root->right, successor->data);
+		}
+
+	}
+	return root;
 }
+
+template<class T>
+T BST<T>::min() {
+	if(root == NULL) {
+		cout << "BST empty\n";
+		return 0;
+	}
+	BSTNode<T>* minNode = findMinNode(root);
+	return minNode -> data;
+}
+
+template<class T>
+BST<T>::BSTNode<T>* BST<T>::findMinNode(BSTNode<T>* root) {
+	if(root == NULL)	return NULL;
+	if(root -> left == NULL)	return root;
+	return findMinNode(root->left);
+}
+
+template<class T>
+T BST<T>::max() {
+	if(root == NULL) {
+		cout << "BST empty\n";
+		return 0;
+	}
+	BSTNode<T>* maxNode = findMaxNode(root);
+	return maxNode -> data;
+}
+
+template<class T>
+BST<T>::BSTNode<T>* BST<T>::findMaxNode(BSTNode<T>* root) {
+	if(root == NULL)	return NULL;
+	if(root -> right == NULL)	return root;
+	return findMaxNode(root -> right);
+}
+
 int main() {
 	BST<int> bst = BST<int>();
 	int x;
@@ -162,5 +240,14 @@ int main() {
 	bst.printPreorder();
 	bst.printPostorder();
 	bst.printLevelorder();
+	cout << "Min element:" << bst.min() << endl;
+	cout << "Max element:" << bst.max() << endl;
+
+	int d;
+	cout << "Enter element to remove:\n";
+	cin >> d;
+	bst.remove(d);
+	bst.printLevelorder();
+	cout << (bst.contains(50) ? "YES!\n" : "No...\n");
 	return 0;
 }
