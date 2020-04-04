@@ -17,6 +17,7 @@ private:
 		}
 	};
 
+	BSTNode<T> *root;
 	BSTNode<T>* insert(BSTNode<T>* root, T x);
 	void preorder(BSTNode<T> *root);
 	void inorder(BSTNode<T> *root);
@@ -25,8 +26,8 @@ private:
 	BSTNode<T>* findMinNode(BSTNode<T>* root);
 	BSTNode<T>* findMaxNode(BSTNode<T>* root);
 	void copyNodeData(BSTNode<T>* from, BSTNode<T>* to);
+	int size(BSTNode<T>* root);
 public:
-	BSTNode<T> *root; // shift this to private later
 
 	BST() {
 		root = NULL;
@@ -42,6 +43,7 @@ public:
 	T min();
 	T max();
 	bool find(T key);
+	int size();
 };
 
 template<class T>
@@ -226,8 +228,22 @@ BST<T>::BSTNode<T>* BST<T>::findMaxNode(BSTNode<T>* root) {
 	return findMaxNode(root -> right);
 }
 
+template<class T>
+int BST<T>::size() {
+	return size(root);
+}
+
+template<class T>
+int BST<T>::size(BSTNode<T>* root) {
+	if(root == NULL)
+		return 0;
+	return size(root -> left) + size(root -> right) + 1;
+}
+
+
 int main() {
 	BST<int> bst = BST<int>();
+	// Just some driver code for testing
 	int x;
 	int t;
 	cin >> t;
@@ -236,6 +252,7 @@ int main() {
 		cin >> x;
 		bst.insert(x);
 	}
+	cout << "Size of BST: " << bst.size() << endl;
 	bst.printInorder();
 	bst.printPreorder();
 	bst.printPostorder();
