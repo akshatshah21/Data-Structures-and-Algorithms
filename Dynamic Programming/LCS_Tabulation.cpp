@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-int lcs(char x[], char y[], int l1, int l2, char ans[], int *l) {
+int lcs(int x[], int y[], int l1, int l2, int ans[], int *l) {
 	int L[l1+1][l2+1];
 	for(int i=0;i<=l1;i++) {
 		for(int j=0;j<=l2;j++) {
@@ -29,14 +29,14 @@ int lcs(char x[], char y[], int l1, int l2, char ans[], int *l) {
 int main() {
 	int n1, n2;
 	cin >> n1 >> n2;
-	char x[n1], y[n2];
+	int x[n1], y[n2];
 	for(int i=0;i<n1;i++)
 		cin >> x[i];
 	for(int i=0;i<n2;i++)
 		cin >> y[i];
 	int l = max(n1, n2);
 	int lcopy = l;
-	char ans[l];
+	int ans[l];
 	cout << "Length of LCS: " << lcs(x, y, n1, n2, ans, &lcopy) << "\n";
 	cout << "LCS: ";
 	for(int i=lcopy;i<l;i++)
