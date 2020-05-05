@@ -40,7 +40,8 @@ int main() {
 	for(int i=0;i<m;i++) {
 		cin >> u >> v >> w;
 		g[u].push_back({v, w});
-		g[v].push_back({u, w});
+		// If undirected, 
+		// g[v].push_back({u, w});
 	}
 	vector<int> d, p;
 	dijkstra(g, n, d, p, 0);
