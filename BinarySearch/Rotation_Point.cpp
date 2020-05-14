@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-// Fails for case: 1 1 2 1
+// Works for distinct elements only
 int rotation_point(int a[], int lo, int hi) {
 	if(a[lo] < a[hi])
 		return lo;
