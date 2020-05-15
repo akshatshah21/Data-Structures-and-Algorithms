@@ -1,5 +1,16 @@
 #include<iostream>
 using namespace std;
+int binary_search(int a[], int lo, int hi, int key) {
+	int mid;
+	while(lo <= hi) {
+		mid = lo + (hi-lo)/2;
+		if(a[mid] == key)
+			return mid;
+		if(key < a[mid])	hi = mid-1;
+		else	lo = mid + 1;
+	}
+	return -1;
+}
 int main() {
 	int n;
 	cout << "Enter number of numbers:";
@@ -10,18 +21,10 @@ int main() {
 	int item;
 	cout << "Enter value to be searched:";
 	cin >> item;
-	int low = 0;
-	int high = n;
-	int mid;
-	bool f = false;
-	while(low < high) {
-		mid = (low+high) / 2;
-		if(arr[mid] == item)	{f = true; break;}
-		else if(item < arr[mid])	high = mid;
-		else	low = mid + 1;
-	}
-	if(f)
-		cout << item << " found at position " << mid+1 << endl;
-	else	cout << "Not found\n";
+	int pos = binary_search(arr, 0, n-1, item);
+	if(pos != -1)
+		cout << "Position: " << pos + 1 << "\n";
+	else
+		cout << "Not found\n";
 	return 0;
 }

@@ -1,5 +1,6 @@
 #include<iostream>
 using namespace std;
+
 // Works for distinct elements only
 int rotation_point(int a[], int lo, int hi) {
 	if(a[lo] < a[hi])

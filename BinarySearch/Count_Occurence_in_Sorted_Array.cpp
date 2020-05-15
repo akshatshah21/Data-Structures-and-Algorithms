@@ -1,38 +1,38 @@
 #include<iostream>
 using namespace std;
 
-int lower_bound(int arr[], int low, int high, int key) {
-	int mid;
-	int lo = low, hi = high;
-	while(lo < hi) {
+int lower_bound(int arr[], int lo, int hi, int key) {
+	int mid, ans = -1;
+	while(lo <= hi) {
 		mid = lo + (hi-lo) / 2;
-		if(arr[mid] >= key)
-			hi = mid;
+		if(arr[mid] >= key) {
+			ans = mid;
+			hi = mid-1;
+		}
 		else
 			lo = mid+1;
 	}
-	if(lo == high || (lo == low && arr[lo] > key))
-		lo--;
-	return lo;
+	return ans;
 }
 
 int upper_bound(int arr[], int lo, int hi, int key) {
-	int mid;
-	while(lo < hi) {
+	int mid, ans = hi+1;
+	while(lo <= hi) {
 		mid = lo + (hi-lo) / 2;
-		if(arr[mid] <= key)
-			lo = mid+1;
+		if(arr[mid] > key) {
+			ans = mid;
+			hi = mid-1;
+		}
 		else
-			hi = mid;
+			lo = mid+1;
 	}
-	return lo;
+	return ans;
 }
 
 int count(int arr[], int low, int high, int key) {
 	int lb = lower_bound(arr, low, high, key);
 	int ub = upper_bound(arr, low, high, key);
-
-	if(lb == -1 || (ub == high && arr[high-1] != key))
+	if(lb == -1)
 		return 0;
 	return ub-lb;
 }
@@ -48,7 +48,7 @@ int main() {
 		cin >> a[i];
 	int k;
 	cin >> k;
-	cout << count(a, 0, n, k) << endl;
+	cout << count(a, 0, n-1, k) << endl;
 	return 0;
 }
 

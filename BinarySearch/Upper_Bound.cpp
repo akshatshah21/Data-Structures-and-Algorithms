@@ -3,19 +3,20 @@ using namespace std;
 
 /* Upper Bound Function
  * Returns the least (first) index of the smallest element in the array strictly greater than key
- * If the key is greater than the maximum element of the array, it returns end
- * If the key is lesser than the minimum element of the arrat, it returns start
+ * If the key is greater than the maximum element of the array, it returns -1
  */
-int upper_bound(int arr[], int start, int end, int key) {
-	int lo = start, hi = end, mid;
-	while(lo < hi) {
+int upper_bound(int arr[], int lo, int hi, int key) {
+	int mid, ans = hi+1;
+	while(lo <= hi) {
 		mid = lo + (hi-lo)/2;
-		if(arr[mid] <= key)
-			lo = mid + 1;
+		if(arr[mid] > key) {
+			ans = mid;
+			hi = mid-1;
+		}
 		else
-			hi = mid;
+			lo = mid+1;
 	}
-	return lo;
+	return ans;
 }
 
 int main() {
@@ -29,6 +30,10 @@ int main() {
 		cin >> a[i];
 	int k;
 	cin >> k;
-	cout << upper_bound(a, 0, n, k) << endl;
+	int ub = upper_bound(a, 0, n-1, k);
+	if(ub != n)
+		cout << a[ub] << " at position: " << ub << "\n";
+	else
+		cout << "Does not exist in this array\n";
 	return 0;
 }

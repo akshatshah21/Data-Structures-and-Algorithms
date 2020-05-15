@@ -1,11 +1,11 @@
 #include<iostream>
 using namespace std;
 
-int floor_sqrt(int n) {
-	if(n == 0)
-		return 0;
-	int lo = 1, hi = n/2 + 1, mid, sq;
-	while(lo < hi) {
+int sqrt(int n) {
+	if(n == 0 || n == 1)
+		return n;
+	int lo = 1, hi = n/2, mid, sq;
+	while(lo <= hi) {
 		mid = lo + (hi-lo)/2;
 		sq = mid * mid;
 		if(sq == n)
@@ -13,14 +13,14 @@ int floor_sqrt(int n) {
 		else if(sq < n)
 			lo = mid+1;
 		else
-			hi = mid;
+			hi = mid-1;
 	}
-	return lo;
+	return -1;
 }
 
 int main() {
 	int n;
 	cin >> n;
-	cout << floor_sqrt(n) << endl;
+	cout << sqrt(n) << endl;
 	return 0;
 }

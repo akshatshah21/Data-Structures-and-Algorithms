@@ -1,21 +1,21 @@
 #include<iostream>
 using namespace std;
 /* Lower Bound function
- * Returns the least (first) index of the largest element <= key, in the array from [start, end)
- * If key is smaller than smallest element, it returns -1
+ * Returns the least (first) index of an element >= key, in the array from [start, end]
+ * If key is larger than the max element, it returns -1
  */
-int lower_bound(int arr[], int start, int end, int key) {
-	int lo = start, hi = end, mid;
-	while(lo < hi) {
+int lower_bound(int arr[], int lo, int hi, int key) {
+	int mid, ans = -1;
+	while(lo <= hi) {
 		mid = lo + (hi-lo)/2;
-		if(arr[mid] >= key)
-			hi = mid;
+		if(arr[mid] >= key) {
+			ans = mid;
+			hi = mid-1;
+		}
 		else
 			lo = mid+1;
 	}
-	if(lo == end || (lo == start && arr[lo] > key))
-		lo--;
-	return lo;
+	return ans;
 }
 
 int main() {
@@ -29,7 +29,11 @@ int main() {
 		cin >> a[i];
 	int k;
 	cin >> k;
-	cout << lower_bound(a, 0, n, k) << endl;
+	int lb = lower_bound(a, 0, n-1, k);
+	if(lb != -1)
+		cout << a[lb] << "\n";
+	else
+		cout << "Does not exist in the array\n";
 	return 0;
 }
 
