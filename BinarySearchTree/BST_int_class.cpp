@@ -1,4 +1,5 @@
 #include <iostream>
+#include<queue>
 using namespace std;
 class Node {
 public:
@@ -17,6 +18,10 @@ class BST {
 	int find_min(Node* root);
 	int find_max(Node* root);
 	Node* remove_node(Node *root, int val);
+	void inorder(Node *root);
+	void preorder(Node *root);
+	void postorder(Node *root);
+	void level_order(Node *root);
 
 public:
 	BST() : root(nullptr) {}
@@ -26,6 +31,10 @@ public:
 	bool contains(int val);
 	int min();
 	int max();
+	void print_inorder();
+	void print_preorder();
+	void print_postorder();
+	void print_level_order();
 };
 
 /* Public method to insert a value in BSTNode
@@ -101,13 +110,13 @@ Node* BST::remove_node(Node *root, int val) {
 			return nullptr;
 		}
 		// Case 2: One child
-		else if(root -> left) {
-			Node* temp = root -> left;
+		else if(!root -> left) {
+			Node* temp = root -> right;
 			delete root;
 			return temp;
 		}
-		else if(root -> right) {
-			Node *temp = root -> right;
+		else if(!root -> right) {
+			Node *temp = root -> left;
 			delete root;
 			return temp;
 		}
@@ -120,10 +129,16 @@ Node* BST::remove_node(Node *root, int val) {
 	return root;
 }
 
+/* Public method to return minimum key in BST
+ * Returns -1 if BST is empty
+ */
 int BST::min() {
 	return find_min(root);
 }
 
+/* Private utility method to find minimum key in BSTNode
+ * Returns -1 if BST is empty
+ */
 int BST::find_min(Node *root) {
 	if(!root)
 		return -1;
@@ -132,16 +147,89 @@ int BST::find_min(Node *root) {
 	return root -> val;
 }
 
+/* Public method to return maximum key in BST
+* Returns -1 if BST is empty
+ */
 int BST::max() {
 	return find_max(root);
 }
 
+/* Private utility method to find maximum key in BSTNode
+ * Returns -1 if BST is empty
+ */
 int BST::find_max(Node *root) {
 	if(!root)
 		return -1;
 	while(root -> right)
 		root = root -> right;
 	return root -> val;
+}
+
+/* Public methods to print different traversals of BST
+ * Each method calls a private utility method
+ */
+
+void BST::print_inorder() {
+	inorder(root);
+	cout << "\n";
+}
+
+void BST::print_preorder() {
+	preorder(root);
+	cout << "\n";
+}
+
+void BST::print_postorder() {
+	postorder(root);
+	cout << "\n";
+}
+
+void BST::print_level_order() {
+	level_order(root);
+	cout << "\n";
+}
+
+/* Private methods for BST traversals
+ */
+void BST::inorder(Node *root) {
+	if(root) {
+		inorder(root -> left);
+		cout << root -> val << " ";
+		inorder(root -> right);
+	}
+}
+
+void BST::preorder(Node *root) {
+	if(root) {
+		cout << root -> val << " ";
+		preorder(root -> left);
+		preorder(root -> right);
+	}
+}
+
+void BST::postorder(Node *root) {
+	if(root) {
+		postorder(root -> left);
+		postorder(root -> right);
+		cout << root -> val << " ";
+	}
+}
+
+void BST::level_order(Node *root) {
+	if(root) {
+		queue<Node*> q;
+		q.push(root);
+		Node *curr;
+		while(!q.empty()) {
+			curr = q.front();
+			q.pop();
+			cout << curr -> val << " ";
+			if(curr -> left)
+				q.push(curr -> left);
+			if(curr -> right)
+				q.push(curr -> right);
+		}
+	}
 }
 
 int main() {
