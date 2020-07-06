@@ -1,39 +1,39 @@
 #include<iostream>
-#include<map>
-#include<set>
+#include<vector>
 using namespace std;
 
-bool dfs(map<int, set<int>> g, bool vis[], int u, int parent) {
-	vis[u] = true;
-	for(int v: g[u]) {
-		if(vis[v] && parent != v)
-			return true;
-		else if(!vis[v] && dfs(g, vis, v, u))
+bool dfs(vector<int> adj[], bool vis[], int node, int parent) {
+	vis[node] = true;
+	for(int i: adj[node]) {
+		if(i == parent)
+			continue;
+		if(vis[i] || dfs(adj, vis, i, node))
 			return true;
 	}
 	return false;
 }
 
 int main() {
-	map<int, set<int>> g;
+
+	// Input
 	int n, e, u, v;
 	cin >> n >> e;
+	vector<int> adj[];
 	for(int i=0;i<e;i++) {
 		cin >> u >> v;
 		g[u].insert(v);
-		g[v].insert(u);
+		g[v].insert(u); // since undirected
 	}
+	// End of Input
+	
 	bool cycle = false;
-	bool vis[n] = {false};
-	for(auto i: g) {
-		if(!vis[i.first] && dfs(g, vis, i.first, -1)) {
+	bool vis[n] = {0};
+	for(int i=0;i<n;i++) {
+		if(!vis[i] && dfs(g, vis, i, -1)) {
 			cycle = true;
 			break;
 		}
 	}
-	if(cycle)
-		cout << "YES\n";
-	else
-		cout << "NO\n";
+	cout << (cycle ? "Cycle exists" : "Cycle does not exist") << '\n';
 	return 0;
 }
