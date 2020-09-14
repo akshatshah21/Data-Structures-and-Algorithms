@@ -13,11 +13,10 @@ ll _bexp(ll x, ll n) {
 
 // Iterative
 ll bexp(ll x, ll n) {
-	ll p = x;
 	ll res = 1;
 	while(n) {
-		if(n&1) res = ((res%MOD)*(p%MOD))%MOD;
-		p = ((p%MOD)*(p%MOD))%MOD;
+		if(n&1) res = ((res%MOD)*(x%MOD))%MOD;
+		x = ((x%MOD)*(x%MOD))%MOD;
 		n >>= 1;
 	}
 	return res;
