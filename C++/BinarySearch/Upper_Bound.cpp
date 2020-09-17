@@ -3,7 +3,7 @@ using namespace std;
 
 /* Upper Bound Function
  * Returns the least (first) index of the smallest element in the array strictly greater than key
- * If the key is greater than the maximum element of the array, it returns -1
+ * If the key is greater than the maximum element of the array, it returns n
  */
 int upper_bound(int arr[], int lo, int hi, int key) {
 	int mid, ans = hi+1;
