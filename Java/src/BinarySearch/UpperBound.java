@@ -7,13 +7,13 @@ import java.io.PrintWriter;
 
 /*
     Find the first element in array that is strictly greater than the key
-    Return -1 if such an element does not exist
+    Return n if such an element does not exist
  */
 public class UpperBound {
     static PrintWriter out;
     
-    private static int upperBound(int[] a, int key) {
-        int lo = 0, hi = a.length-1, mid, ans = -1;
+    public static int upperBound(int[] a, int key) {
+        int lo = 0, hi = a.length-1, mid, ans = a.length;
         while(lo <= hi) {
             mid = lo + (hi-lo)/2;
             if(a[mid] > key) {

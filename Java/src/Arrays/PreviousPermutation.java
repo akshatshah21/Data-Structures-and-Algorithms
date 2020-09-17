@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 public class PreviousPermutation {
     static PrintWriter out;
 
-    private static void findPreviousPermutation(int[] a) {
+    public static void findPreviousPermutation(int[] a) {
         int i = a.length - 2;
         // Find the first element from behind which does not follow
         // the descending order (as viewed from right)

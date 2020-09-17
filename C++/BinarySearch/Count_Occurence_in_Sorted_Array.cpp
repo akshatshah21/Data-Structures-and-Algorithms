@@ -2,7 +2,7 @@
 using namespace std;
 
 int lower_bound(int arr[], int lo, int hi, int key) {
-	int mid, ans = -1;
+	int mid, ans = hi+1;
 	while(lo <= hi) {
 		mid = lo + (hi-lo) / 2;
 		if(arr[mid] >= key) {
@@ -32,8 +32,6 @@ int upper_bound(int arr[], int lo, int hi, int key) {
 int count(int arr[], int low, int high, int key) {
 	int lb = lower_bound(arr, low, high, key);
 	int ub = upper_bound(arr, low, high, key);
-	if(lb == -1)
-		return 0;
 	return ub-lb;
 }
 

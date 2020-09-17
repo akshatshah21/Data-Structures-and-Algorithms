@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 public class BinarySearch {
     static PrintWriter out;
     
-    private static boolean search(int[] a, int key) {
+    public static boolean search(int[] a, int key) {
         int lo = 0, hi = a.length-1, mid;
         while(lo <= hi) {
             mid = lo + (hi-lo)/2;

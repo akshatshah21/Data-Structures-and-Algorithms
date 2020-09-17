@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 public class NextPermutation {
     static PrintWriter out;
 
-    private static void findNextPermutation(int[] a) {
+    public static void findNextPermutation(int[] a) {
        int i= a.length - 2;
        // Find the first element from behind which does not follow the
        // ascending order (as viewed from right)

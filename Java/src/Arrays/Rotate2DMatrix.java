@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 public class Rotate2DMatrix {
     static PrintWriter out;
 
-    private static void rotate(int[][] a) {
+    public static void rotate(int[][] a) {
         int n = a.length;
         // Take transpose
         for (int i = 0; i < n; i++) {

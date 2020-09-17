@@ -2,10 +2,10 @@
 using namespace std;
 /* Lower Bound function
  * Returns the least (first) index of an element >= key, in the array from [start, end]
- * If key is larger than the max element, it returns -1
+ * If key is larger than the max element, it returns n
  */
 int lower_bound(int arr[], int lo, int hi, int key) {
-	int mid, ans = -1;
+	int mid, ans = hi+1;
 	while(lo <= hi) {
 		mid = lo + (hi-lo)/2;
 		if(arr[mid] >= key) {
@@ -30,8 +30,8 @@ int main() {
 	int k;
 	cin >> k;
 	int lb = lower_bound(a, 0, n-1, k);
-	if(lb != -1)
-		cout << a[lb] << "\n";
+	if(lb != n)
+		cout << lb << "\n";
 	else
 		cout << "Does not exist in the array\n";
 	return 0;
